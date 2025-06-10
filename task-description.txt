@@ -1,0 +1,68 @@
+Music Playlist Management API
+=============================
+
+Overview
+--------
+This is a Django REST API for managing Playlists. 
+The API supports nested serialization, track ordering within playlists, and dynamic URL generation for related objects.
+
+Core Features
+-------------
+ **Playlists**
+   - Custom collections of tracks with maintained order.
+   - Prevents duplicate tracks.
+   - Supports both track addition and complete playlist update.
+   - Efficiently bulk inserts playlist tracks.
+
+Design Highlights
+-----------------
+- **UUID-based primary keys**: All models use UUIDs for better security and external referencing.
+- **Hyperlinked serializers**: Navigable API with links to related artist/album/track endpoints.
+- **Furl**: Used to dynamically generate filtered URLs (e.g., list of albums by a specific artist).
+- **Atomic operations**: Ensures integrity during playlist updates using `transaction.atomic()`.
+- **Bulk operations**: Optimized `bulk_create()` for playlist updates.
+- **Custom validation**: Duplicate track prevention logic in serializer `validate_tracks()`.
+
+Tech Stack
+----------
+- Django
+- Django REST Framework (DRF)
+- Furl (for URL manipulation)
+- Python 3.10+
+
+API Endpoint Examples
+---------------------
+
+- `/api/playlists/` – Create or update playlists
+
+Usage
+-----
+To test or use the API, you can use tools like Postman, cURL, or DRF's browsable API.
+
+1. Create artists, albums, and tracks via POST.
+2. Create a playlist using:
+   ```json
+   {
+     "name": "My Roadtrip Playlist",
+     "tracks": [
+       {"track": "<track_uuid>", "order": 1},
+       {"track": "<track_uuid>", "order": 2}
+     ]
+   }
+
+
+
+Admin panel customization
+-------------------------
+
+1. Added search and filter in playlists to search and filter in admin panel
+2. Filtering and ordering with playlist name
+
+
+Frontend
+--------
+
+1. Used html,bootstrap,javascript and css 
+2. Created a Create playlist button to add playlist
+3. Added edit and delete buttons to edit and delete playlist
+4. Displaing all the playlist with the specific order and track
